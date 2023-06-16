@@ -1,5 +1,5 @@
-.homepage{
-  section{
+.homepage {
+  section:not(:first-child) {
     padding: 100px 0px;
   }
 }

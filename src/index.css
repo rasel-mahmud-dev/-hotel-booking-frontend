@@ -12,8 +12,14 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   background: #e9eeff;
+
+  --primary: #2c65ec;
 }
 
+
+html{
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;

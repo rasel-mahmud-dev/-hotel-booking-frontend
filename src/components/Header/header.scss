@@ -6,6 +6,16 @@
   left: 0;
   width: 100%;
     z-index: 10;
+  transition: all .5s ease;
+
+  &.fixed-navigation{
+    box-shadow: 0 2px 12px -3px rgb(54 54 54 / 58%);
+    background: var(--primary);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+
   .container {
     display: flex;
     align-items: center;
