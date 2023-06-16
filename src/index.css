@@ -11,6 +11,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  background: #e9eeff;
 }
 
 
@@ -21,4 +22,14 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+.container{
+  max-width: 1366px;
+  margin: auto;
+}
+.card{
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 17px -3px #313131;
 }

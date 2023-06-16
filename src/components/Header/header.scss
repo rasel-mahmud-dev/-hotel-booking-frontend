@@ -1,0 +1,32 @@
+
+.header {
+  background-color: #ffffff;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    background: red;
+    border-radius: 100%;
+  }
+
+  nav {
+    display: flex;
+    column-gap: 20px;
+
+    li {
+      list-style: none;
+      font-weight: 500;
+      font-size: 14px;
+    }
+  }
+}
