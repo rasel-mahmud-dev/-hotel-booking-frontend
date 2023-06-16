@@ -1,12 +1,11 @@
 .find-room-form{
-
   transform: translateY(-50%);
   max-width: 1200px;
   margin: auto;
-  width: 100%;
+  width: 98%;
+  box-shadow: 0 3px 30px 0px rgba(98, 98, 98, 0.39);
 
   form{
     min-height: 100px;
   }
-
 }

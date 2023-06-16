@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import "./button.scss"
 
 const Button = ({className="", variant = "primary", children, ...attr}) => {
     return (
@@ -12,7 +13,7 @@ const Button = ({className="", variant = "primary", children, ...attr}) => {
 
 Button.propType = {
     className: PropTypes.string,
-    variant: PropTypes.oneOf(["primary", "secondary"]),
+    variant: PropTypes.oneOf(["primary", "secondary", "default"]),
     children: PropTypes.element
 }
 

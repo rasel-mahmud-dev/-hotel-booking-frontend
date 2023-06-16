@@ -1,0 +1,24 @@
+
+.btn{
+  border: none;
+
+  background: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 8px 22px;
+  border-radius: 50px;
+  box-shadow: 0 0 0 3px #cfdfff;
+
+
+  &-default{
+    background: #ffffff;
+    color: #727272;
+    box-shadow: 0 0 0 1px #ffffff;
+  }
+
+  &-primary{
+    background: #2c65ec;
+    color: white;
+  }
+}

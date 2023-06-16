@@ -1,3 +1,18 @@
 .input{
-  border: 1px solid gainsboro;
+  border: none;
+  background: rgba(185, 210, 255, 0.2);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px rgba(185, 210, 255, 0.45);
+  outline: none;
+  transition: box-shadow .2s ease;
+  color: #4f4f4f;
+
+  &:focus{
+    box-shadow: 0 0 0 1px rgb(75, 141, 255);
+  }
+
 }
