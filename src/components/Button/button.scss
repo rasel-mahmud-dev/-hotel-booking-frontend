@@ -1,12 +1,12 @@
 
 .btn{
   border: none;
-
+  min-height: 38px;
   background: white;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
-  padding: 8px 22px;
+  padding: 8px 30px;
   border-radius: 50px;
   box-shadow: 0 0 0 3px #cfdfff;
 
@@ -14,11 +14,11 @@
   &-default{
     background: #ffffff;
     color: #727272;
-    box-shadow: 0 0 0 1px #ffffff;
+    box-shadow: 0 0 0 1px #ffffff !important;
   }
 
   &-primary{
-    background: var(--primary);
-    color: white;
+    background: var(--primary) !important;
+    color: white !important;
   }
 }

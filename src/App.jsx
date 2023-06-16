@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import {RouterProvider} from "react-router-dom";
 import router from "src/routes/index.jsx";
 

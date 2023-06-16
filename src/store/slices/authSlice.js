@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {loginOrRegistrationAction} from "store/actions/authAction.js";
 
 const initialState = {
     auth: null,
@@ -12,6 +13,19 @@ export const authSlice = createSlice({
 
     },
     extraReducers: (builder) => {
+        // login or registration successful
+        builder.addCase(loginOrRegistrationAction.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.auth = action.payload
+            }
+            state.authLoaded = true
+        })
+
+        // handle rejection error
+        builder.addCase(loginOrRegistrationAction.rejected, (state) => {
+            state.auth = null
+            state.authLoaded = true
+        })
 
     }
 });

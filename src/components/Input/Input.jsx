@@ -1,11 +1,9 @@
 import React from 'react';
 import "./input.scss"
 
-const Input = ({className, attr}) => {
+const Input = ({...attr}) => {
     return (
-        <input className={`input`} {...attr}>
-
-        </input>
+        <input className={`input`} {...attr} />
     );
 };
 
