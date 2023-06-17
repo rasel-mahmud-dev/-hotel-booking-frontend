@@ -53,7 +53,7 @@ const Login = () => {
     }
 
     return (
-        <div className="container !mt-40">
+        <div className="container !mt-8">
             <div className="max-w-lg mx-auto card p-5 ">
                 <h4 className="card-title">Login</h4>
                 <form onSubmit={handleSubmit}>

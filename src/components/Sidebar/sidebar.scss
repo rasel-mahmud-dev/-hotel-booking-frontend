@@ -55,7 +55,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 900px) {
   .sidebar {
     position: fixed;
     left: calc(var(--sidebar-width) * -1) !important;

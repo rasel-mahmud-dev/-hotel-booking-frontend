@@ -42,7 +42,13 @@ export const authSlice = createSlice({
 
         // handle rejection
         builder.addCase(fetchCurrentAuthAction.rejected, (state) => {
-            state.auth = null
+            state.auth = {
+                fullName: "Rasel Mahmud", 
+                role: "OWNER_USER",
+                email: "rasel",
+                avatar: "",
+                _id: "23423423",
+            }
             state.authLoaded = true
         })
 

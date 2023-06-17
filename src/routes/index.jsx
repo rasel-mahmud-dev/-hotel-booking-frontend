@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <Main/>,
         children: [
             {path: "", element: <Homepage/>},
-            {path: "/hotel/rooms", element: <FilterRooms/>},
+            {path: "hotel/rooms", element: <FilterRooms/>},
             {path: "login", element: <AuthExcludeRoute> <Login/> </AuthExcludeRoute>},
             {path: "registration", element: <AuthExcludeRoute><Registration/></AuthExcludeRoute>}
         ]
