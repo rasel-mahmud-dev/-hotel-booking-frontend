@@ -20,3 +20,20 @@ export const loginOrRegistrationAction = createAsyncThunk("authSlice/login", asy
         return thunkAPI.rejectWithValue( errorResponse(ex))
     }
 })
+
+
+
+//  current logged auth load action
+export const fetchCurrentAuthAction = createAsyncThunk("authSlice/fetchCurrentAuth", async (payload, thunkAPI)=>{
+    try{
+        let {status, data} = await apis.get("/auth/fetch-auth")
+        if(status === 201){
+            return data.user
+        }
+    } catch (ex){
+        // send error message with reject type in reducer
+        return thunkAPI.rejectWithValue( errorResponse(ex))
+    }
+})
+
+

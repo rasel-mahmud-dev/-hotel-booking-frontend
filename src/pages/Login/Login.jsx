@@ -4,7 +4,7 @@ import Button from "components/Button/Button.jsx";
 import useCustomReducer from "src/hooks/useReducer.jsx";
 import {loginOrRegistrationAction} from "store/actions/authAction.js";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Loader from "components/Loader/Loader.jsx";
 import InfoMessage from "components/InfoMessage/InfoMessage.jsx";
 
@@ -40,9 +40,9 @@ const Login = () => {
         dispatch(loginOrRegistrationAction({
             type: "login",
             data: userInput
-        })).unwrap().then(()=>{
+        })).unwrap().then(() => {
             navigate('/')
-        }).finally(()=>{
+        }).finally(() => {
             // setUserInput({isLoading: false})
         })
     };
@@ -53,13 +53,13 @@ const Login = () => {
     }
 
     return (
-        <div className="container !mt-24">
+        <div className="container !mt-40">
             <div className="max-w-lg mx-auto card p-5 ">
                 <h4 className="card-title">Login</h4>
                 <form onSubmit={handleSubmit}>
 
-                    {userInput.isLoading && <Loader title="Please wait" width="200" /> }
-                    <InfoMessage status="error" message={userInput.errorMessage} />
+                    {userInput.isLoading && <Loader title="Please wait" width="200"/>}
+                    <InfoMessage status="error" message={userInput.errorMessage}/>
 
                     <InputGroup
                         name="email"
@@ -67,7 +67,7 @@ const Login = () => {
                         labelClass="font-sm  text-gray-600"
                         className="flex flex-col mt-4"
                         label="Email"
-                        placeholder="Enter you email"
+                        placeholder="Enter your email"
                     />
 
                     <InputGroup
@@ -76,10 +76,17 @@ const Login = () => {
                         labelClass="font-sm  text-gray-600"
                         className="flex flex-col mt-4"
                         label="Password"
-                        placeholder="Enter you password"
+                        placeholder="Enter your password"
                     />
 
-                    <Button variant="primary" type="submit" className="mt-8">Search</Button>
+                    <div className="text-sm mt-4">
+                        <span>Didn`t have an account ?</span>
+                        <Link className="text-primary ml-1" to="/registration">Create an account</Link>
+                    </div>
+
+                    <Button disabled={userInput.isLoading}  variant="primary" type="submit" className="mt-8">Login</Button>
+
+
                 </form>
             </div>
         </div>

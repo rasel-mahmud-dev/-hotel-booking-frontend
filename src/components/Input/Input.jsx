@@ -1,9 +1,17 @@
 import React from 'react';
 import "./input.scss"
 
-const Input = ({...attr}) => {
+const Input = ({as = "input", renderOption, ...attr}) => {
     return (
-        <input className={`input`} {...attr} />
+        as === "select"
+            ? (
+                <select className={`input`} {...attr}>
+                    {renderOption()}
+                </select>
+            )
+            : as === "textarea"
+                ? <textarea className={`input`} {...attr} />
+                : <input className={`input`} {...attr} />
     );
 };
 
