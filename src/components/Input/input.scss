@@ -1,4 +1,4 @@
-.input{
+.input {
   border: none;
   background: rgba(185, 210, 255, 0.2);
   font-size: 14px;
@@ -10,13 +10,36 @@
   transition: box-shadow .2s ease;
   color: #4f4f4f;
 
-  &:focus{
+  &:focus {
     box-shadow: 0 0 0 1px rgb(75, 141, 255);
   }
 
 
 }
 
-textarea{
+textarea {
   min-height: 130px;
+}
+
+
+.react-datepicker__input-container {
+
+}
+
+.react-datepicker__input-container input {
+  border: none;
+  background: rgba(185, 210, 255, 0.2);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 7px 12px;
+  border-radius: 5px;
+  box-shadow: 0 0 0 1px rgba(185, 210, 255, 0.45);
+  outline: none;
+  transition: box-shadow .2s ease;
+  color: #4f4f4f;
+  width: 100%;
+
+  &:focus {
+    box-shadow: 0 0 0 1px rgb(75, 141, 255);
+  }
 }

@@ -29,40 +29,15 @@ const sidebarLinks = [
         to: "/dashboard/all-hotels"
     },
     {
-        label: "My Buyers",
+        label: "My Bookings",
         roles: ["USER", "ADMIN", "HOTEL_OWNER"],
-        to: "/dashboard/my-buyers"
+        to: "/dashboard/my-bookings"
     },
     {
-        label: "My Orders",
-        roles: ["USER", "ADMIN", "HOTEL_OWNER"],
-        to: "/dashboard/my-orders"
-    },
-    {
-        label: "My Wishlist",
-        roles: ["USER", "ADMIN", "HOTEL_OWNER"],
-        to: "/dashboard/my-wishlist",
-    },
-    {
-        label: "My Transactions",
-        roles: ["USER", "ADMIN", "HOTEL_OWNER"],
-        to: "/dashboard/my-transactions"
-    },
-    {
-        label: "All Sellers",
-        roles: ["USER", "ADMIN", "HOTEL_OWNER"],
-        to: "/dashboard/all-sellers"
-    },
-    {
-        label: "All Buyers",
-        roles: ["USER", "ADMIN", "HOTEL_OWNER"],
-        to: "/dashboard/all-buyers"
-    },
-    {
-        label: "All Transactions",
-        roles: ["USER", "ADMIN", "HOTEL_OWNER"],
-        to: "/dashboard/all-transactions"
-    },
+        label: "All User",
+        roles: ["ADMIN"],
+        to: "/dashboard/users"
+    }
 ]
 
 
@@ -97,8 +72,9 @@ const Dashboard = () => {
             <div className="">
                 <Header/>
                 <div className="header-space"></div>
-                <div className="container dashboard-wrapper flex !px-0 ">
-                    <div className={`backdrop ${openSidebar === "dashboard" ? "backdrop-open" : ""}`} onClick={toggleSidebar}></div>
+                <div className="container dashboard-wrapper !px-0 ">
+                    <div className={`backdrop ${openSidebar === "dashboard" ? "backdrop-open" : ""}`}
+                         onClick={toggleSidebar}></div>
                     <Sidebar
                         activeItem={activeItem}
                         sidebarLink={sidebarLinks}

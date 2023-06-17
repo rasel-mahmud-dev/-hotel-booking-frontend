@@ -1,6 +1,6 @@
 import {createBrowserRouter} from "react-router-dom"
 import Main from "layout/Main";
-import {lazy} from "react";
+
 import Registration from "pages/Registration/Registration.jsx";
 import Dashboard from "layout/Dashboard.jsx";
 import DashboardHome from "pages/Dashboard/DashboardHome.jsx";
@@ -14,6 +14,7 @@ import FilterRooms from "pages/FilterRooms/FilterRooms.jsx";
 
 import HomePage from "pages/Homepage/HomePage.jsx";
 import Login  from "pages/Login/Login.jsx";
+import MyBookings from "pages/Dashboard/User/MyBookings.jsx";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +35,8 @@ const router = createBrowserRouter([
             {path: "add-hotel", element: <AddHotel/>},
             {path: "update-hotel/:hotelId", element: <AddHotel/>},
             {path: "my-hotel", element: <MyHotel/>},
+
+            {path: "my-bookings", element: <MyBookings/>},
 
             {path: "add-room", element: <AddRoom/>},
             {path: "update-room/:roomId", element: <AddRoom/>},

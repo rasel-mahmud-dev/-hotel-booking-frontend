@@ -12,9 +12,6 @@ import roomTypeData from "src/store/roomTypeData.json"
 import {createRoomAction, fetchOwnerHotelAction, getHotelDetailAction} from "store/actions/hotelAction.js";
 
 
-
-
-
 const AddRoom = () => {
 
     const dispatch = useDispatch()
@@ -27,6 +24,7 @@ const AddRoom = () => {
 
     const [userInput, setUserInput] = useCustomReducer({
         roomName: "",
+        roomNo: "",
         hotelId: "",
         roomType: "", // Standard //
         description: "",
@@ -47,6 +45,7 @@ const AddRoom = () => {
             dispatch(getHotelDetailAction(query)).unwrap().then((data) => {
                 if (data) {
                     setUserInput({
+                        roomNo: data.roomNo,
                         roomName: data.roomName,
                         hotelId: data.hotelId,
                         roomType: data.roomType,
@@ -72,6 +71,9 @@ const AddRoom = () => {
         if (!userInput.roomName.trim()) {
             return setUserInput({errorMessage: "Room name is required"})
         }
+        if (isNaN(Number(userInput.roomNo))) {
+            return setUserInput({errorMessage: "Room No must be an number"})
+        }
         if (!userInput.description.trim()) {
             return setUserInput({errorMessage: "Description is required"})
         }
@@ -88,6 +90,7 @@ const AddRoom = () => {
         formData.append("roomType", userInput.roomType)
         formData.append("hotelId", userInput.hotelId)
         formData.append("capacity", userInput.capacity)
+        formData.append("roomNo", userInput.roomNo)
 
         if (userInput.image && userInput.image instanceof Blob) {
             formData.append("image", userInput.image, "image.jpg")
@@ -129,6 +132,18 @@ const AddRoom = () => {
                         label="Room Name"
                         placeholder="Room name"
                     />
+
+
+                    <InputGroup
+                        name="roomNo"
+                        value={userInput.roomNo}
+                        onChange={handleChange}
+                        labelClass="font-sm  text-gray-600"
+                        className="flex flex-col mt-4"
+                        label="Room No."
+                        placeholder="Room Number"
+                    />
+
 
                     <InputGroup
                         name="hotelId"
@@ -219,7 +234,7 @@ const AddRoom = () => {
                     />
 
 
-                    <Button  variant="primary" type="submit"
+                    <Button variant="primary" type="submit"
                             className="mt-8">{roomId ? "Update" : "Create"}</Button>
                 </form>
             </div>

@@ -4,15 +4,22 @@ import router from "src/routes/index.jsx";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {fetchCurrentAuthAction} from "store/actions/authAction.js";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchCurrentAuthAction())
-  }, []);
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(fetchCurrentAuthAction())
+    }, []);
 
 
-  return <RouterProvider router={router} />
+    return (
+        <>
+            <ToastContainer autoClose={10000} />
+            <RouterProvider router={router}/>
+        </>
+    )
 }
 
 export default App

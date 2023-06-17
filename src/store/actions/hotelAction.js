@@ -88,3 +88,17 @@ export const filterRoomsAction = createAsyncThunk("rooms/filter", async (payload
         return thunkAPI.rejectWithValue(errorResponse(ex))
     }
 })
+
+
+// reserve room action
+export const reserveRoomAction = createAsyncThunk("hotelSlice/reserve-room", async (payload, thunkAPI) => {
+    try {
+
+        let {status, data} = await apis.post(`/room/reserve`,  payload)
+        if (status === 201) {
+            return data
+        }
+    } catch (ex) {
+        return thunkAPI.rejectWithValue(errorResponse(ex))
+    }
+})

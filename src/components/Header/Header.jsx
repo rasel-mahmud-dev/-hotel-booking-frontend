@@ -66,9 +66,12 @@ const Header = () => {
 
             <div className="container">
 
-                <div className="logo">
-                    <img src="/images/hotel-booking-logo-design_675581-44 copy.webp" alt=""/>
-                </div>
+                <Link to="/">
+                    <div className="logo flex items-center gap-x-1 cursor-pointer">
+                        <img src="/images/logo.svg" alt=""/>
+                        <h4 className="text-white text-xl uppercase">Shelter</h4>
+                    </div>
+                </Link>
 
                 <nav>
                     {Object.keys(items).map(key => (
