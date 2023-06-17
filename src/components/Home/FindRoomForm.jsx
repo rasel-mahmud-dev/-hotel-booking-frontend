@@ -19,7 +19,6 @@ const FindRoomForm = () => {
     })
 
     function handleChange({target: {name, value}}) {
-        alert(value)
         setUserInput({[name]: value})
     }
 

@@ -80,7 +80,7 @@ export const fetchAllRoomsAction = createAsyncThunk("rooms/fetchAllRooms", async
 export const filterRoomsAction = createAsyncThunk("rooms/filter", async (payload, thunkAPI) => {
     try {
 
-        let {status, data} = await apis.post(`/rooms/filter`, payload)
+        let {status, data} = await apis.post(`/room/filter`, payload)
         if (status === 200) {
             return data.rooms
         }
