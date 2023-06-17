@@ -6,7 +6,9 @@ import Dashboard from "layout/Dashboard.jsx";
 import DashboardHome from "pages/Dashboard/DashboardHome.jsx";
 import PrivateRoute from "src/middleware/PrivateRoute.jsx";
 import AuthExcludeRoute from "src/middleware/AuthExcludeRoute.jsx";
-import AddHotel from "pages/Dashboard/AddHotel.jsx";
+import AddHotel from "pages/Dashboard/Shared/AddHotel.jsx";
+import MyHotel from "pages/Dashboard/HotelOwner/MyHotel.jsx";
+import AddRoom from "pages/Dashboard/Shared/AddRoom.jsx";
 
 
 const Homepage = lazy(() => import("pages/Homepage/HomePage.jsx"));
@@ -28,6 +30,11 @@ const router = createBrowserRouter([
         children: [
             {path: "", element: <DashboardHome/>},
             {path: "add-hotel", element: <AddHotel/>},
+            {path: "update-hotel/:hotelId", element: <AddHotel/>},
+            {path: "my-hotel", element: <MyHotel/>},
+
+            {path: "add-room", element: <AddRoom/>},
+            {path: "update-room/:roomId", element: <AddRoom/>},
         ]
     }
 ])

@@ -1,21 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import InputGroup from "components/Input/InputGroup.jsx";
 import Button from "components/Button/Button.jsx";
 import useCustomReducer from "src/hooks/useReducer.jsx";
 import {useDispatch} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Loader from "components/Loader/Loader.jsx";
 import InfoMessage from "components/InfoMessage/InfoMessage.jsx";
 import ImageChoose from "components/Input/Image.jsx";
-import addresses from "src/store/addresses.json"
+import addresses from "store/addresses.json"
 import getUniqueElem from "src/utils/getUniqueElem.js";
-import {createHotelAction} from "store/actions/hotelAction.js";
+import {createHotelAction, getHotelDetailAction} from "store/actions/hotelAction.js";
 
 
 const AddHotel = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const {hotelId} = useParams()
 
     const [userInput, setUserInput] = useCustomReducer({
         name: "",
@@ -27,6 +29,26 @@ const AddHotel = () => {
         errorMessage: "",
         isLoading: false
     })
+
+    useEffect(() => {
+
+        if (hotelId) {
+            const query = "?type=edit&hotelId=" + hotelId
+            dispatch(getHotelDetailAction(query)).unwrap().then((data) => {
+                if (data) {
+                    setUserInput({
+                        name: data.name,
+                        description: data.description,
+                        image: data.image,
+                        country: data.address?.country,
+                        city: data.address?.city,
+                        street: data.address?.street,
+                    })
+                }
+            })
+        }
+
+    }, [hotelId])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -47,14 +69,25 @@ const AddHotel = () => {
         setUserInput({isLoading: true})
 
         const formData = new FormData()
-        formData.append("firstName", userInput.firstName.trim())
-        formData.append("lastName", userInput.lastName?.trim())
-        formData.append("email", userInput.email.trim())
-        formData.append("password", userInput.password.trim())
-        formData.append("phone", userInput.phone.trim())
+        formData.append("name", userInput.name.trim())
+        formData.append("description", userInput.description?.trim())
+        formData.append("city", userInput.city.trim())
+        formData.append("street", userInput.street.trim())
+        formData.append("country", userInput.country.trim())
+
+        if (userInput.image && userInput.image instanceof Blob) {
+            formData.append("image", userInput.image, "image.jpg")
+        } else {
+            formData.append("image", userInput.image)
+        }
+        
+
+        if (hotelId) {
+            formData.append("_id", hotelId)
+        }
 
         dispatch(createHotelAction(formData)).unwrap().then(() => {
-            // navigate('/')
+            navigate('/dashboard/my-hotel')
         }).finally(() => {
             setUserInput({isLoading: false})
         })
@@ -68,7 +101,7 @@ const AddHotel = () => {
     return (
         <div className="container ">
             <div className="max-w-lg mx-auto card p-5 mt-8 ">
-                <h4 className="card-title">Add Hotel</h4>
+                <h4 className="card-title">{!hotelId ? "Add Hotel" : "Update Hotel"}</h4>
 
                 <form onSubmit={handleSubmit}>
                     {userInput.isLoading && <Loader title="Please wait" width="200"/>}
@@ -76,6 +109,7 @@ const AddHotel = () => {
 
                     <InputGroup
                         name="name"
+                        value={userInput.name}
                         onChange={handleChange}
                         labelClass="font-sm  text-gray-600"
                         className="flex flex-col mt-4"
@@ -84,6 +118,7 @@ const AddHotel = () => {
                     />
 
                     <InputGroup
+                        value={userInput.description}
                         as="textarea"
                         name="description"
                         onChange={handleChange}
@@ -98,6 +133,7 @@ const AddHotel = () => {
                         Object.keys(addresses[0]).map(key => (
                             <InputGroup
                                 name={key}
+                                value={userInput[key]}
                                 onChange={handleChange}
                                 labelClass="font-sm  text-gray-600"
                                 className="flex flex-col mt-4"
@@ -113,11 +149,17 @@ const AddHotel = () => {
                         ))
                     }
 
-                    <ImageChoose onChange={handleChange} placeholder="Choose hotel image" name="image" label="Hotel Image"/>
+                    <ImageChoose
+                        defaultValue={userInput.image}
+                        onChange={handleChange}
+                        placeholder="Choose hotel image"
+                        name="image"
+                        label="Hotel Image"
+                    />
 
 
                     <Button disabled={userInput.isLoading} variant="primary" type="submit"
-                            className="mt-8">Create</Button>
+                            className="mt-8">{hotelId ? "Update" : "Create"}</Button>
                 </form>
             </div>
         </div>
