@@ -3,13 +3,17 @@ import InputGroup from "components/Input/InputGroup.jsx";
 import Button from "components/Button/Button.jsx";
 import useCustomReducer from "src/hooks/useReducer.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import Loader from "components/Loader/Loader.jsx";
 import InfoMessage from "components/InfoMessage/InfoMessage.jsx";
 import ImageChoose from "components/Input/Image.jsx";
 import roomTypeData from "src/store/roomTypeData.json"
 import Room from "components/Room/Room"
 import {createRoomAction, fetchOwnerHotelAction, getHotelDetailAction, filterRoomsAction} from "store/actions/hotelAction.js";
+
+import addresses from "store/addresses.json"
+import getUniqueElem from "src/utils/getUniqueElem.js";
+
 
 const data = [
     {
@@ -59,9 +63,13 @@ const data = [
 
 const FilterRooms = () => {
 
-
+    const [seachParams] = useSearchParams()
+    let city  = seachParams.get("city")
+    let startDate  = seachParams.get("startDate")
+    let endDate  = seachParams.get("endDate")
+    let capacity  = seachParams.get("capacity")
     
-    const [userInput, setUserInput] = useCustomReducer({
+    const [filterInput, setFilterInput] = useCustomReducer({
         hotelId: "",
         roomType: "", // Standard //
         capacity: 2,
@@ -69,12 +77,29 @@ const FilterRooms = () => {
         errorMessage: "",
         isLoading: false
     })
+    useEffect(()=>{
+        let query = {}
+        if(city){
+            query["city"] = city
+        }
+        if(capacity){
+            query["capacity"] = capacity
+        }
+        if(startDate){
+            query["startDate"] = startDate
+        }
+        if(endDate){
+            query["endDate"] = endDate
+        }
+        setFilterInput(query)
+    }, [startDate, endDate, city, capacity])
+    
 
     function handleChange({target: {name, value}}) {
         setUserInput({[name]: value})
     }
 
-    function handleSearchRooms(){
+    function handleFilterRoom(){
         filterRoomsAction({
             search:"",
             capacity: 1,
@@ -86,15 +111,15 @@ const FilterRooms = () => {
 
     return (
         <div className="flex ">
-            <div className="sidebar">
+            <div className="sidebar p-5">
                 <h4>Filter Rooms</h4>
                 <InputGroup
                         name="roomType"
-                        defaultValue={userInput.roomType}
-                        value={userInput.roomType}
+                        defaultValue={filterInput.roomType}
+                        value={filterInput.roomType}
                         onChange={handleChange}
-                        labelClass="font-sm  text-gray-600"
-                        className="flex flex-col mt-4"
+                        labelClass="font-sm  text-gray-600 mb-1"
+                        className="flex flex-col mt-2"
                         label="Room Type"
                         // placeholder="Room name"
                         as="select"
@@ -102,15 +127,46 @@ const FilterRooms = () => {
                             <>
                                 <option value={""}>Select type</option>
                                 {
-                                    roomTypeData.map((hotel, i) => (
-                                        <option key={i} value={hotel._id}>{hotel.name}</option>
+                                    roomTypeData.map((type, i) => (
+                                        <option key={i} value={type}>{type}</option>
                                     ))
                                 }
                             </>
                         )}
                     />
+            <InputGroup
+                defaultValue={filterInput.city}
+                onChange={handleChange}
+                labelClass="font-sm  text-gray-600 mb-1"
+                className="flex flex-col mt-2"
+                label={"City"}
+                name="city"
+                placeholder={"Enter city"}
+                as="select"
+                renderOption={() => (
+                    <>
+                    <option value="">Where you want to stay</option>
+                    {getUniqueElem(addresses.map(add => add["city"])).map((elem, i) => (
+                        <option key={i} value={elem}>{elem}</option>
+                    ))}
+                    </>
+                )}
+            />
 
+            <InputGroup
+                value={filterInput.capacity}
+                type="number"
+                name="capacity"
+                onChange={handleChange}
+                labelClass="font-sm  text-gray-600 mb-1"
+                className="flex flex-col mt-2"
+                label="Capacity"
+                placeholder="Room Capacity"
+            />
 
+                {/* <InputGroup label="Room Type" placeholder="Select Room"></InputGroup> */}
+                <Button onClick={handleFilterRoom} className="mt-4">Search</Button>
+           
             </div>
             <div>
             <div className="container">

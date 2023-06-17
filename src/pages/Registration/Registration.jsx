@@ -19,6 +19,7 @@ const Registration = () => {
         lastName: "",
         email: "",
         password: "",
+        role: "USER",
         phone: "",
         errorMessage: "",
         isLoading: false
@@ -41,7 +42,7 @@ const Registration = () => {
         }
 
 
-        if (userInput.role === "hotel-owner" && !userInput.phone.trim()){
+        if (userInput.role === "HOTEL_OWNER" && !userInput.phone.trim()){
             return setUserInput({errorMessage: "Hotel Owner phone is required"})
         }
 
@@ -53,6 +54,7 @@ const Registration = () => {
         formData.append("email", userInput.email.trim())
         formData.append("password", userInput.password.trim())
         formData.append("phone", userInput.phone.trim())
+        formData.append("role", userInput.role)
 
         dispatch(loginOrRegistrationAction({
             type: "registration",
@@ -117,13 +119,13 @@ const Registration = () => {
 
                     <InputGroup
                         name="role"
+                        defaultValue={userInput.role}
                         onChange={handleChange}
                         labelClass="font-sm  text-gray-600"
                         className="flex flex-col mt-4"
                         label="Role"
                         placeholder="Enter your password"
                         as="select"
-                        defaultValue="user"
                         renderOption={()=>(
                             [{name: "User", value: "USER"}, {name:"Hotel owner", value: "HOTEL_OWNER"}].map(role=>(
                                 <option key={role.name} value={role.value}>{role.name}</option>

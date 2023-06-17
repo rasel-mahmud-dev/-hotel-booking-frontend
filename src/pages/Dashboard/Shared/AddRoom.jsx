@@ -166,8 +166,8 @@ const AddRoom = () => {
                             <>
                                 <option value={""}>Select type</option>
                                 {
-                                    roomTypeData.map((hotel, i) => (
-                                        <option key={i} value={hotel._id}>{hotel.name}</option>
+                                    roomTypeData.map((roomType, i) => (
+                                        <option key={i} value={roomType}>{roomType}</option>
                                     ))
                                 }
                             </>

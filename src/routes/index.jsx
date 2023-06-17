@@ -12,15 +12,15 @@ import AddRoom from "pages/Dashboard/Shared/AddRoom.jsx";
 import FilterRooms from "pages/FilterRooms/FilterRooms.jsx";
 
 
-const Homepage = lazy(() => import("pages/Homepage/HomePage.jsx"));
-const Login = lazy(() => import("pages/Login/Login.jsx"));
+import HomePage from "pages/Homepage/HomePage.jsx";
+import Login  from "pages/Login/Login.jsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Main/>,
         children: [
-            {path: "", element: <Homepage/>},
+            {path: "", element: <HomePage/>},
             {path: "hotel/rooms", element: <FilterRooms/>},
             {path: "login", element: <AuthExcludeRoute> <Login/> </AuthExcludeRoute>},
             {path: "registration", element: <AuthExcludeRoute><Registration/></AuthExcludeRoute>}

@@ -1,5 +1,23 @@
 [
-  {
-    "name": "Standard"
-  }
+"Single Room",
+"Twin Room",
+"Double Room",
+"Triple Room",
+"Quad Room",
+"Hollywood Twin Room",
+"Double-Double Room",
+"King Room",
+"Queen Room",
+"Interconnecting Room",
+"Adjoining Room",
+"Adjacent Room",
+"Parlour Room",
+"Studio Room",
+"Cabana Room",
+"Suite Room",
+"Duplex Room",
+"Efficiency Room",
+"Hospitality Room",
+"Penthouse Room",
+"Lanai Room"
 ]
