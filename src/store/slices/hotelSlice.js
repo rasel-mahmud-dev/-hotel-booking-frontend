@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {createHotelAction, fetchAllHotelAction} from "store/actions/hotelAction.js";
+import {createHotelAction, fetchAllHotelAction, fetchOwnerHotelAction} from "store/actions/hotelAction.js";
 
 const initialState = {
     hotel: [], // public all hotel list
@@ -30,6 +30,13 @@ export const hotelSlice = createSlice({
         builder.addCase(fetchAllHotelAction.fulfilled, (state, action) => {
             if (action.payload) {
                 state.hotel = action.payload
+            }
+        })
+
+        builder.addCase(fetchOwnerHotelAction.fulfilled, (state, action) => {
+
+            if (action.payload.hotel && action.payload.authId) {
+                state.ownerHotel[action.payload.authId] = action.payload.hotel
             }
         })
     }

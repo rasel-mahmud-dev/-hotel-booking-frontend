@@ -9,6 +9,7 @@ import AuthExcludeRoute from "src/middleware/AuthExcludeRoute.jsx";
 import AddHotel from "pages/Dashboard/Shared/AddHotel.jsx";
 import MyHotel from "pages/Dashboard/HotelOwner/MyHotel.jsx";
 import AddRoom from "pages/Dashboard/Shared/AddRoom.jsx";
+import FilterRooms from "pages/FilterRooms/FilterRooms.jsx";
 
 
 const Homepage = lazy(() => import("pages/Homepage/HomePage.jsx"));
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
         element: <Main/>,
         children: [
             {path: "", element: <Homepage/>},
+            {path: "/hotel/rooms", element: <FilterRooms/>},
             {path: "login", element: <AuthExcludeRoute> <Login/> </AuthExcludeRoute>},
             {path: "registration", element: <AuthExcludeRoute><Registration/></AuthExcludeRoute>}
         ]

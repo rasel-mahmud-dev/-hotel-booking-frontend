@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAllHotelAction} from "store/actions/hotelAction.js";
+import {fetchAllRoomsAction} from "store/actions/hotelAction.js";
 import {BiPen} from "react-icons/bi";
 import {BsTrash} from "react-icons/bs";
 import trimText from "src/utils/trimText.js";
@@ -8,12 +8,12 @@ import {Link} from "react-router-dom";
 import Button from "components/Button/Button.jsx";
 
 
-const MyHotel = () => {
+const MyRooms = () => {
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchAllHotelAction())
+        dispatch(fetchAllRoomsAction())
     }, []);
 
     const {hotel} = useSelector(state => state.hotelState)
@@ -83,4 +83,4 @@ const MyHotel = () => {
     );
 };
 
-export default MyHotel;
+export default MyRooms;

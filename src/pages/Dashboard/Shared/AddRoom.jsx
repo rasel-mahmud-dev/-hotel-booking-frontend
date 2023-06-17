@@ -2,13 +2,17 @@ import React, {useEffect} from 'react';
 import InputGroup from "components/Input/InputGroup.jsx";
 import Button from "components/Button/Button.jsx";
 import useCustomReducer from "src/hooks/useReducer.jsx";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import Loader from "components/Loader/Loader.jsx";
 import InfoMessage from "components/InfoMessage/InfoMessage.jsx";
 import ImageChoose from "components/Input/Image.jsx";
-import getUniqueElem from "src/utils/getUniqueElem.js";
-import {createRoomAction, getHotelDetailAction} from "store/actions/hotelAction.js";
+import roomTypeData from "src/store/roomTypeData.json"
+
+import {createRoomAction, fetchOwnerHotelAction, getHotelDetailAction} from "store/actions/hotelAction.js";
+
+
+
 
 
 const AddRoom = () => {
@@ -17,6 +21,9 @@ const AddRoom = () => {
     const navigate = useNavigate()
 
     const {roomId} = useParams()
+
+    const {ownerHotel} = useSelector(state => state.hotelState)
+    const {auth} = useSelector(state => state.authState)
 
     const [userInput, setUserInput] = useCustomReducer({
         roomName: "",
@@ -30,7 +37,9 @@ const AddRoom = () => {
         isLoading: false
     })
 
-
+    useEffect(() => {
+        dispatch(fetchOwnerHotelAction())
+    }, [])
 
     useEffect(() => {
         if (roomId) {
@@ -57,6 +66,9 @@ const AddRoom = () => {
         // clear initial state for loader and error message
         setUserInput({isLoading: false, errorMessage: ""})
 
+        if (!userInput.hotelId) {
+            return setUserInput({errorMessage: "Please select a hotel"})
+        }
         if (!userInput.roomName.trim()) {
             return setUserInput({errorMessage: "Room name is required"})
         }
@@ -70,10 +82,10 @@ const AddRoom = () => {
         setUserInput({isLoading: true})
 
         const formData = new FormData()
-        formData.append("roomName", userInput.name.trim())
+        formData.append("roomName", userInput.roomName.trim())
         formData.append("description", userInput.description?.trim())
-        formData.append("price", userInput.city.trim())
-        formData.append("roomType", userInput.roomType.trim())
+        formData.append("price", userInput.price)
+        formData.append("roomType", userInput.roomType)
         formData.append("hotelId", userInput.hotelId)
         formData.append("capacity", userInput.capacity)
 
@@ -116,6 +128,50 @@ const AddRoom = () => {
                         className="flex flex-col mt-4"
                         label="Room Name"
                         placeholder="Room name"
+                    />
+
+                    <InputGroup
+                        name="hotelId"
+                        defaultValue={userInput.hotelId}
+                        value={userInput.hotelId}
+                        onChange={handleChange}
+                        labelClass="font-sm  text-gray-600"
+                        className="flex flex-col mt-4"
+                        label="Select Hotel"
+                        // placeholder="Room name"
+                        as="select"
+                        renderOption={() => (
+                            <>
+                                <option value={""}>Select your hotel</option>
+                                {
+                                    auth?._id && ownerHotel[auth._id] && ownerHotel[auth._id].map((hotel, i) => (
+                                        <option key={i} value={hotel._id}>{hotel.name}</option>
+                                    ))
+                                }
+                            </>
+                        )}
+                    />
+
+                    <InputGroup
+                        name="roomType"
+                        defaultValue={userInput.roomType}
+                        value={userInput.roomType}
+                        onChange={handleChange}
+                        labelClass="font-sm  text-gray-600"
+                        className="flex flex-col mt-4"
+                        label="Room Type"
+                        // placeholder="Room name"
+                        as="select"
+                        renderOption={() => (
+                            <>
+                                <option value={""}>Select type</option>
+                                {
+                                    roomTypeData.map((hotel, i) => (
+                                        <option key={i} value={hotel._id}>{hotel.name}</option>
+                                    ))
+                                }
+                            </>
+                        )}
                     />
 
                     <InputGroup
@@ -163,7 +219,7 @@ const AddRoom = () => {
                     />
 
 
-                    <Button disabled={userInput.isLoading} variant="primary" type="submit"
+                    <Button  variant="primary" type="submit"
                             className="mt-8">{roomId ? "Update" : "Create"}</Button>
                 </form>
             </div>
