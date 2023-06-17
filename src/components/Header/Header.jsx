@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import "./header.scss"
-import {Link, NavLink, useLocation} from "react-router-dom";
+import {Link, NavLink, useLocation, useNavigate} from "react-router-dom";
 import throttle from "src/utils/throttle.js";
 import Button from "components/Button/Button.jsx";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,7 +9,6 @@ import MenuDropdown from "components/Dropdown/MenuDropdown.jsx";
 import {logoutAction} from "store/slices/authSlice.js";
 
 const Header = () => {
-
 
     const {auth} = useSelector(state => state.authState)
 
@@ -26,6 +25,7 @@ const Header = () => {
 
     const location = useLocation()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     function handleOnScroll() {
@@ -83,14 +83,11 @@ const Header = () => {
                 {auth ? (
                     <div>
                         <MenuDropdown render={() => (
-                            <div>
-                                <Link to="/dashboard">
-                                    <li className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Dashboard</li>
-                                </Link>
+                            <div className="">
 
-                                <Link to="/dashboard">
-                                    <li className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Dashboard</li>
-                                </Link>
+                                <li onClick={()=>navigate("/dashboard")} className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Dashboard</li>
+
+                                <li onClick={()=>navigate("/dashboard")} className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Dashboard</li>
 
                                 <li onClick={handleLogout}
                                     className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Logout

@@ -6,3 +6,10 @@
     font-size: 30px;
     font-weight: 700;
 }
+.loader-v-position{
+    @apply flex justify-center;
+    position: fixed;
+    left: 50%;
+    top: 35vh;
+    transform: translateX(-50%);
+}

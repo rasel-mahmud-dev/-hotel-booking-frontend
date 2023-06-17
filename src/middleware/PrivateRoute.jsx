@@ -8,13 +8,13 @@ const PrivateRoute = ({children}) => {
     const {authLoaded, auth} = useSelector(state=>state.authState)
 
     if (!authLoaded) return (
-        <div className="py-24 w-full flex justify-center  items-center flex-col">
+        <div className="loader-v-position">
            <Loader  title="Cheeking your permission"/>
         </div>
     )
 
     if (authLoaded && !auth) {
-        return <Navigate to="/join"/>
+        return <Navigate to="/login"/>
     }
 
     return children

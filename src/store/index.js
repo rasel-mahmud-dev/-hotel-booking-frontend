@@ -3,10 +3,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
 import authReducer from "./slices/authSlice";
+import appReducer from "./slices/appSlice.js";
+import {hotelSlice} from "store/slices/hotelSlice.js";
 
 export const store = configureStore({
     reducer: {
         authState: authReducer,
+        appState: appReducer,
+        hotelState: hotelSlice.reducer,
     }
 })
 

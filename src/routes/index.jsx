@@ -6,6 +6,7 @@ import Dashboard from "layout/Dashboard.jsx";
 import DashboardHome from "pages/Dashboard/DashboardHome.jsx";
 import PrivateRoute from "src/middleware/PrivateRoute.jsx";
 import AuthExcludeRoute from "src/middleware/AuthExcludeRoute.jsx";
+import AddHotel from "pages/Dashboard/AddHotel.jsx";
 
 
 const Homepage = lazy(() => import("pages/Homepage/HomePage.jsx"));
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard/></PrivateRoute>,
         children: [
             {path: "", element: <DashboardHome/>},
+            {path: "add-hotel", element: <AddHotel/>},
         ]
     }
 ])

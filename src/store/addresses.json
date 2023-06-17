@@ -1,0 +1,43 @@
+
+[
+  {
+    "street": "Dhaka - 456 Elm St",
+    "city": "Dhaka",
+    "country": "Bangladesh"
+  },
+  {
+    "street": "Bogura - 456 Elm St",
+    "city": "Bogura",
+    "country": "Bangladesh"
+  },
+  {
+    "street": "Sonatola - 456 Elm St",
+    "city": "Sonatola",
+    "country": "Bangladesh"
+  },
+  {
+    "street": "Sylet - 456 Elm St",
+    "city": "Sylet",
+    "country": "Bangladesh"
+  },
+  {
+    "street": "Rangpur - 456 Elm St",
+    "city": "Rangpur",
+    "country": "Bangladesh"
+  },
+  {
+    "street": "Dinajpur - 456 Elm St",
+    "city": "Dinajpur",
+    "country": "Bangladesh"
+  },
+  {
+    "street": "Cox-bazar - 456 Elm St",
+    "city": "Cox-bazar",
+    "country": "Bangladesh"
+  },
+  {
+    "street": "456 Elm St",
+    "city": "Lost angel",
+    "country": "United State"
+  }
+]

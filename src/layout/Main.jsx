@@ -9,7 +9,7 @@ const Main = () => {
     return (
         <div className="relative">
             <Header/>
-            <Suspense fallback={<Loader title="Page is loading..."/>}>
+            <Suspense fallback={<div className="loader-v-position"><Loader title="Page is loading..."/></div>}>
                 <Outlet/>
             </Suspense>
         </div>
