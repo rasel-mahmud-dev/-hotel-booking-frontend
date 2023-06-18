@@ -95,9 +95,9 @@ const Header = () => {
                                     <li onClick={() => navigate("/dashboard")}
                                         className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Dashboard
                                     </li>
-                                    <li onClick={() => navigate("/dashboard")}
-                                        className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Dashboard
-                                    </li>
+                                    {/*<li onClick={() => navigate("/dashboard")}*/}
+                                    {/*    className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Dashboard*/}
+                                    {/*</li>*/}
                                     <li onClick={handleLogout}
                                         className="list-none text-sm font-medium hover:bg-primary/20 py-2 px-2">Logout
                                     </li>

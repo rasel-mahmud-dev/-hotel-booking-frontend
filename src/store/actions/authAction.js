@@ -54,3 +54,22 @@ export const updateProfileAction = createAsyncThunk("authSlice/update profile", 
 })
 
 
+
+
+
+
+
+// fetch all users for admin
+export const fetchUsersAction = createAsyncThunk("authSlice/fetch-users", async (payload, thunkAPI)=>{
+    try{
+        let {status, data} = await apis.post("/auth/users", payload)
+        if(status === 200){
+            return data.users
+        }
+    } catch (ex){
+        // send error message with reject type in reducer
+        return thunkAPI.rejectWithValue( errorResponse(ex))
+    }
+})
+
+

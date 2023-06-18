@@ -109,7 +109,7 @@ export const filterRoomsAction = createAsyncThunk("rooms/filter", async (payload
 export const reserveRoomAction = createAsyncThunk("hotelSlice/reserve-room", async (payload, thunkAPI) => {
     try {
 
-        let {status, data} = await apis.post(`/room/reserve`,  payload)
+        let {status, data} = await apis.post(`/room/reserve`, payload)
         if (status === 201) {
             return data
         }
@@ -122,7 +122,7 @@ export const reserveRoomAction = createAsyncThunk("hotelSlice/reserve-room", asy
 export const fetchBookedRoomAction = createAsyncThunk("hotelSlice/fetch-booked-room", async (payload, thunkAPI) => {
     try {
 
-        let {status, data} = await apis.get(`/room/booked` + (payload ? payload :  ""))
+        let {status, data} = await apis.get(`/room/booked` + (payload ? payload : ""))
         if (status === 200) {
             return data
         }
@@ -146,10 +146,10 @@ export const cancelBookingAction = createAsyncThunk("hotelSlice/fetch-booked-roo
 })
 
 // checkout booking room
-export const checkOutBookingRoomAction = createAsyncThunk("hotelSlice/fetch-booked-room", async (payload, thunkAPI) => {
+export const checkOutBookingRoomAction = createAsyncThunk("hotelSlice/checkout-booked-room", async (payload, thunkAPI) => {
     try {
 
-        let {status, data} = await apis.post(`/room/cancel-booking`, payload)
+        let {status, data} = await apis.post(`/room/booked-checkOut`, payload)
         if (status === 201) {
             return data
         }

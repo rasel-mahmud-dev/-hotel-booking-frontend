@@ -19,8 +19,13 @@ const sidebarLinks = [
         to: "/dashboard/add-hotel"
     },
     {
+        label: "Add Room",
+        roles: ["ADMIN", "HOTEL_OWNER"],
+        to: "/dashboard/add-room"
+    },
+    {
         label: "My Hotel",
-        roles: ["HOTEL_OWNER", "ADMIN"],
+        roles: ["HOTEL_OWNER"],
         to: "/dashboard/my-hotel"
     },
     {

@@ -101,7 +101,7 @@ const MyBookings = () => {
                                     </div>
                                 )}>
                                     <div
-                                        className="w-9 h-9 bg-primary/10 flex items-center justify-center rounded-full">
+                                        className="cursor-pointer w-9 h-9 bg-primary/10 flex items-center justify-center rounded-full">
                                         <FaEllipsisH/>
                                     </div>
                                 </MenuDropdown>
