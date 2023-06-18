@@ -30,7 +30,7 @@ const Avatar = ({className = "", imgClass = "", username, src}) => {
             {src
                 ? <div className="avatar-root">
                     <img onError={handleErrorImage} src={src} alt="avatar"
-                         className={`rounded-full w-full ${imgClass}`}/>
+                         className={`rounded-full object-cover w-full ${imgClass}`}/>
                 </div>
                 : <div
                     className={`rounded-full bg-gray-600/30 w-9 h-9 flex items-center justify-center uppercase ${imgClass}`}>{letter}</div>

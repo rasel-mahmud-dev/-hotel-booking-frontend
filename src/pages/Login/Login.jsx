@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import Loader from "components/Loader/Loader.jsx";
 import InfoMessage from "components/InfoMessage/InfoMessage.jsx";
+import {toast} from "react-toastify";
 
 
 const Login = () => {
@@ -42,8 +43,10 @@ const Login = () => {
             data: userInput
         })).unwrap().then(() => {
             navigate('/')
+        }).catch(msg=>{
+            toast.error(msg)
         }).finally(() => {
-            // setUserInput({isLoading: false})
+            setUserInput({isLoading: false})
         })
     };
 

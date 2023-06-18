@@ -2,18 +2,18 @@
 function throttle(fn, wait, id){
     let time = Date.now()
 
-    return function (){
+    return function (e){
 
         // clear timeout if it not last scroll
         clearTimeout(id)
 
         let afterDelay = time + wait
         if(afterDelay - Date.now() < 0){
-            fn()
+            fn(e)
             time = Date.now()
         }
         id = setTimeout(()=>{
-            fn()
+            fn(e)
             // console.log("last scroll")
         }, 1000)
     }

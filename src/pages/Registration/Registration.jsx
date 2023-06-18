@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import Loader from "components/Loader/Loader.jsx";
 import InfoMessage from "components/InfoMessage/InfoMessage.jsx";
+import {toast} from "react-toastify";
 
 
 const Registration = () => {
@@ -42,7 +43,7 @@ const Registration = () => {
         }
 
 
-        if (userInput.role === "HOTEL_OWNER" && !userInput.phone.trim()){
+        if (userInput.role === "HOTEL_OWNER" && !userInput.phone.trim()) {
             return setUserInput({errorMessage: "Hotel Owner phone is required"})
         }
 
@@ -61,8 +62,10 @@ const Registration = () => {
             data: formData
         })).unwrap().then(() => {
             navigate('/')
+        }).catch(msg => {
+            toast.error(msg)
         }).finally(() => {
-            // setUserInput({isLoading: false})
+            setUserInput({isLoading: false})
         })
     };
 
@@ -72,7 +75,7 @@ const Registration = () => {
     }
 
     return (
-        <div className="container !mt-40">
+        <div className="container !mt-10">
             <div className="max-w-lg mx-auto card p-5 ">
                 <h4 className="card-title">Create an account</h4>
                 <form onSubmit={handleSubmit}>
@@ -116,7 +119,6 @@ const Registration = () => {
                     />
 
 
-
                     <InputGroup
                         name="role"
                         defaultValue={userInput.role}
@@ -126,8 +128,8 @@ const Registration = () => {
                         label="Role"
                         placeholder="Enter your password"
                         as="select"
-                        renderOption={()=>(
-                            [{name: "User", value: "USER"}, {name:"Hotel owner", value: "HOTEL_OWNER"}].map(role=>(
+                        renderOption={() => (
+                            [{name: "User", value: "USER"}, {name: "Hotel owner", value: "HOTEL_OWNER"}].map(role => (
                                 <option key={role.name} value={role.value}>{role.name}</option>
                             ))
                         )}
@@ -142,7 +144,7 @@ const Registration = () => {
                         label="Phone"
                         type="number"
                         placeholder="Enter your phone"
-                    /> }
+                    />}
 
                     <div className="text-sm mt-4">
                         <span>Already have an account ?</span>

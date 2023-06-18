@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchCurrentAuthAction, loginOrRegistrationAction} from "store/actions/authAction.js";
+import {fetchCurrentAuthAction, loginOrRegistrationAction, updateProfileAction} from "store/actions/authAction.js";
 
 const initialState = {
     auth: null,
@@ -44,6 +44,15 @@ export const authSlice = createSlice({
         builder.addCase(fetchCurrentAuthAction.rejected, (state) => {
             state.auth = null
             state.authLoaded = true
+        })
+
+
+        // update profile
+        builder.addCase(updateProfileAction.fulfilled, (state, action) => {
+            state.auth = {
+                ...state.auth,
+                ...action.payload
+            }
         })
 
 

@@ -117,3 +117,43 @@ export const reserveRoomAction = createAsyncThunk("hotelSlice/reserve-room", asy
         return thunkAPI.rejectWithValue(errorResponse(ex))
     }
 })
+
+// fetch booked room
+export const fetchBookedRoomAction = createAsyncThunk("hotelSlice/fetch-booked-room", async (payload, thunkAPI) => {
+    try {
+
+        let {status, data} = await apis.get(`/room/booked` + (payload ? payload :  ""))
+        if (status === 200) {
+            return data
+        }
+    } catch (ex) {
+        return thunkAPI.rejectWithValue(errorResponse(ex))
+    }
+})
+
+
+// cancel booking room
+export const cancelBookingAction = createAsyncThunk("hotelSlice/fetch-booked-room", async (payload, thunkAPI) => {
+    try {
+
+        let {status, data} = await apis.post(`/room/cancel-booking`, payload)
+        if (status === 201) {
+            return data
+        }
+    } catch (ex) {
+        return thunkAPI.rejectWithValue(errorResponse(ex))
+    }
+})
+
+// checkout booking room
+export const checkOutBookingRoomAction = createAsyncThunk("hotelSlice/fetch-booked-room", async (payload, thunkAPI) => {
+    try {
+
+        let {status, data} = await apis.post(`/room/cancel-booking`, payload)
+        if (status === 201) {
+            return data
+        }
+    } catch (ex) {
+        return thunkAPI.rejectWithValue(errorResponse(ex))
+    }
+})

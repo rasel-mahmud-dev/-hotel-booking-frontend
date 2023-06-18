@@ -19,7 +19,7 @@ const Sidebar = ({sidebarLink = [], activeItem= 0, ...attr}) => {
         <div {...attr}>
             <div className="p-4">
                 <div className="text-center border-b-2 border-primary-200/20 pb-3">
-                    <Avatar className="w-20 mx-auto" src={auth?.avatar} username={auth?.fullName} />
+                    <Avatar imgClass="w-20 h-20" className="w-20 h-20 mx-auto" src={auth?.avatar} username={auth?.fullName} />
                     <h1 className="font-semibold text-sm my-1 text-500">{auth?.fullName}</h1>
                     <h1 className="text-sm font-medium text-primary">{auth.role}</h1>
                 </div>

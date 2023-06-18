@@ -37,3 +37,20 @@ export const fetchCurrentAuthAction = createAsyncThunk("authSlice/fetchCurrentAu
 })
 
 
+
+
+
+// update profile
+export const updateProfileAction = createAsyncThunk("authSlice/update profile", async (payload, thunkAPI)=>{
+    try{
+        let {status, data} = await apis.post("/auth/update", payload)
+        if(status === 201){
+            return data.user
+        }
+    } catch (ex){
+        // send error message with reject type in reducer
+        return thunkAPI.rejectWithValue( errorResponse(ex))
+    }
+})
+
+
