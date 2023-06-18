@@ -40,8 +40,13 @@ const sidebarLinks = [
     },
     {
         label: "My Bookings",
-        roles: ["USER", "ADMIN", "HOTEL_OWNER"],
+        roles: ["USER", "HOTEL_OWNER"],
         to: "/dashboard/my-bookings"
+    },
+    {
+        label: "All Bookings",
+        roles: ["ADMIN"],
+        to: "/dashboard/all-bookings"
     },
     {
         label: "All User",

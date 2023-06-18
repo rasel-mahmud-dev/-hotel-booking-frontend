@@ -3,13 +3,15 @@ import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import Loader from "components/Loader/Loader.jsx";
 
-const PrivateRoute = ({children}) => {
+const PrivateRoute = ({roles = [], children}) => {
 
-    const {authLoaded, auth} = useSelector(state=>state.authState)
+
+
+    const {authLoaded, auth} = useSelector(state => state.authState)
 
     if (!authLoaded) return (
         <div className="loader-v-position">
-           <Loader  title="Cheeking your permission"/>
+            <Loader title="Cheeking your permission"/>
         </div>
     )
 
@@ -17,7 +19,11 @@ const PrivateRoute = ({children}) => {
         return <Navigate to="/login"/>
     }
 
-    return children
+    if (auth && roles.includes(auth.role)) {
+        return children;
+    } else {
+        return <Navigate to="/" state={location.pathname}/>;
+    }
 };
 
 export default PrivateRoute;

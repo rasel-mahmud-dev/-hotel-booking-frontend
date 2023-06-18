@@ -17,6 +17,7 @@ import Login from "pages/Login/Login.jsx";
 import MyBookings from "pages/Dashboard/User/MyBookings.jsx";
 import MyRooms from "pages/Dashboard/HotelOwner/MyRooms.jsx";
 import AllUsers from "pages/Dashboard/Admin/AllUsers.jsx";
+import AllBookings from "pages/Dashboard/Admin/AllBookings.jsx";
 
 const router = createBrowserRouter([
     {
@@ -31,21 +32,28 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <PrivateRoute><Dashboard/></PrivateRoute>,
+        element: <PrivateRoute roles={["USER", "ADMIN", "HOTEL_OWNER"]}><Dashboard/></PrivateRoute>,
         children: [
             {path: "", element: <DashboardHome/>},
-            {path: "add-hotel", element: <AddHotel/>},
-            {path: "update-hotel/:hotelId", element: <AddHotel/>},
-            {path: "my-hotel", element: <MyHotel/>},
-            {path: "all-hotels", element: <MyHotel/>}, // admin can see all hotel
-            {path: "my-rooms", element: <MyRooms/>},
+            {path: "add-hotel", element: <PrivateRoute roles={["ADMIN", "HOTEL_OWNER"]}> <AddHotel/> </PrivateRoute>},
+            {
+                path: "update-hotel/:hotelId",
+                element: <PrivateRoute roles={["ADMIN", "HOTEL_OWNER"]}><AddHotel/></PrivateRoute>
+            },
+            {path: "my-hotel", element: <PrivateRoute roles={["ADMIN", "HOTEL_OWNER"]}> <MyHotel/> </PrivateRoute>},
+            {path: "all-hotels", element: <PrivateRoute roles={["ADMIN"]}> <MyHotel/></PrivateRoute>}, // admin can see all hotel
+            {path: "my-rooms", element: <PrivateRoute roles={["ADMIN", "HOTEL_OWNER"]}> <MyRooms/></PrivateRoute>},
 
             {path: "my-bookings", element: <MyBookings/>},
+            {path: "all-bookings", element: <PrivateRoute roles={["ADMIN"]}> <AllBookings/></PrivateRoute>},
 
-            {path: "users", element: <AllUsers/>},
+            {path: "users", element: <PrivateRoute roles={["ADMIN"]}> <AllUsers/></PrivateRoute>},
 
-            {path: "add-room", element: <AddRoom/>},
-            {path: "update-room/:roomId", element: <AddRoom/>},
+            {path: "add-room", element: <PrivateRoute roles={["ADMIN", "HOTEL_OWNER"]}> <AddRoom/></PrivateRoute>},
+            {
+                path: "update-room/:roomId",
+                element: <PrivateRoute roles={["ADMIN", "HOTEL_OWNER"]}> <AddRoom/></PrivateRoute>
+            },
         ]
     }
 ])
