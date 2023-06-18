@@ -33,7 +33,7 @@ const Avatar = ({className = "", imgClass = "", username, src}) => {
                          className={`rounded-full w-full ${imgClass}`}/>
                 </div>
                 : <div
-                    className={`rounded-full bg-dark-600/50 w-9 h-9 flex items-center justify-center uppercase ${imgClass}`}>{letter}</div>
+                    className={`rounded-full bg-gray-600/30 w-9 h-9 flex items-center justify-center uppercase ${imgClass}`}>{letter}</div>
             }
         </div>
     );

@@ -122,7 +122,7 @@ const FilterRooms = () => {
 
                 <InputGroup
                     name="roomType"
-                    defaultValue={filterInput.roomType}
+                    value={filterInput.roomType}
                     onChange={handleChange}
                     labelClass="text-xs font-medium text-gray-500 mb-2"
                     className="flex flex-col mt-5"
@@ -131,7 +131,7 @@ const FilterRooms = () => {
                     as="select"
                     renderOption={() => (
                         <>
-                            <option value={""}>Select type</option>
+                            <option value={""}>Any</option>
                             {
                                 roomTypeData.map((type, i) => (
                                     <option key={i} value={type}>{type}</option>
@@ -141,7 +141,7 @@ const FilterRooms = () => {
                     )}
                 />
                 <InputGroup
-                    defaultValue={filterInput.city}
+                    value={filterInput.city}
                     onChange={handleChange}
                     labelClass="text-xs font-medium text-gray-500 mb-2"
                     className="flex flex-col mt-5"
@@ -151,7 +151,7 @@ const FilterRooms = () => {
                     as="select"
                     renderOption={() => (
                         <>
-                            <option value="">Where you want to stay</option>
+                            <option value="">All City</option>
                             {getUniqueElem(addresses.map(add => add["city"])).map((elem, i) => (
                                 <option key={i} value={elem}>{elem}</option>
                             ))}

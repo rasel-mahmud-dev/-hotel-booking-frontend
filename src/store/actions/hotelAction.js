@@ -65,10 +65,11 @@ export const getHotelDetailAction = createAsyncThunk("hotelSlice/hotelDetail", a
     }
 })
 
-export const fetchAllRoomsAction = createAsyncThunk("rooms/fetchAllRooms", async (payload, thunkAPI) => {
+// fetch room for owner and public
+export const fetchRoomsAction = createAsyncThunk("rooms/fetchRooms", async (payload, thunkAPI) => {
     try {
 
-        let {status, data} = await apis.get(`/rooms` + payload)
+        let {status, data} = await apis.get(`/room` + payload)
         if (status === 200) {
             return data.rooms
         }
@@ -76,6 +77,20 @@ export const fetchAllRoomsAction = createAsyncThunk("rooms/fetchAllRooms", async
         return thunkAPI.rejectWithValue(errorResponse(ex))
     }
 })
+
+// get room detail for edit
+export const getRoomDetailAction = createAsyncThunk("rooms/fetchAllRooms", async (payload, thunkAPI) => {
+    try {
+
+        let {status, data} = await apis.get(`/room/detail` + payload)
+        if (status === 200) {
+            return data.room
+        }
+    } catch (ex) {
+        return thunkAPI.rejectWithValue(errorResponse(ex))
+    }
+})
+
 
 export const filterRoomsAction = createAsyncThunk("rooms/filter", async (payload, thunkAPI) => {
     try {

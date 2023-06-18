@@ -57,11 +57,7 @@ const MyHotel = () => {
 
                             <td>
                                 <div className="flex items-center gap-2">
-                                    {item?.rooms && item?.rooms.map((room)=>(
-                                        <div key={room._id} className="bg-primary px-3 py-px rounded text-xs">
-                                            <Link className="text-white" to={`/room/${room._id}`}>{room.roomName}</Link>
-                                        </div>
-                                    ))}
+                                    {item?.rooms && item?.rooms.length}
                                 </div>
                             </td>
 
@@ -70,7 +66,6 @@ const MyHotel = () => {
                             <td>
                                 <div className="flex items-center gap-x-2">
                                     <Link to={`/dashboard/update-hotel/${item._id}`}><BiPen/></Link>
-                                    <BsTrash/>
                                 </div>
                             </td>
 

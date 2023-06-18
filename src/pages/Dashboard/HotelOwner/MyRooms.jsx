@@ -1,19 +1,23 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchAllRoomsAction} from "store/actions/hotelAction.js";
+import {fetchRoomsAction} from "store/actions/hotelAction.js";
 import {BiPen} from "react-icons/bi";
-import {BsTrash} from "react-icons/bs";
 import trimText from "src/utils/trimText.js";
 import {Link} from "react-router-dom";
 import Button from "components/Button/Button.jsx";
 
 
 const MyRooms = () => {
-
     const dispatch = useDispatch()
 
+    const [rooms, setRooms] = useState([])
+
     useEffect(() => {
-        dispatch(fetchAllRoomsAction())
+        dispatch(fetchRoomsAction("?type=owner")).unwrap().then(rooms => {
+            if (rooms) {
+                setRooms(rooms)
+            }
+        })
     }, []);
 
     const {hotel} = useSelector(state => state.hotelState)
@@ -31,18 +35,18 @@ const MyRooms = () => {
                 <table className="w-full table">
                     <thead>
                     <tr className="">
-                        <th className=" pb-4 text-start">Image</th>
-                        <th className=" pb-4">Name</th>
+                        <th className=" pb-4">Image</th>
+                        <th className=" pb-4 ">Room type</th>
+                        <th className=" pb-4 ">Room name</th>
+                        <th className=" pb-4 whitespace-nowrap">Hotel name</th>
                         <th className=" pb-4 text-start">Description</th>
-                        <th className=" pb-4">Rooms</th>
-                        <th className=" pb-4">City</th>
+                        <th className=" pb-4">Price</th>
                         <th className=" pb-4">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {hotel?.map((item) => (
+                    {rooms?.map((item) => (
                         <tr key={item._id}>
-
                             <td>
                                 <div>
                                     <div className="flex items-center gap-x-2 ">
@@ -50,30 +54,23 @@ const MyRooms = () => {
                                     </div>
                                 </div>
                             </td>
-                            <td className="whitespace-nowrap">{trimText(item.name, 40)}</td>
+                            <td className="whitespace-nowrap">{trimText(item.roomType, 40)}</td>
+                            <td>
+                                {item?.roomName}
+                            </td>
+                            <td>
+                                {item?.hotel?.name}
+                            </td>
 
                             <td>{trimText(item.description, 100)}</td>
 
 
-                            <td>
-                                <div className="flex items-center gap-2">
-                                    {item?.rooms && item?.rooms.map((room)=>(
-                                        <div key={room._id} className="bg-primary px-3 py-px rounded text-xs">
-                                            <Link className="text-white" to={`/room/${room._id}`}>{room.roomName}</Link>
-                                        </div>
-                                    ))}
-                                </div>
-                            </td>
-
-
-                            <td>{item?.address?.city}</td>
+                            <td><span className="text-primary">${item.price}</span></td>
                             <td>
                                 <div className="flex items-center gap-x-2">
-                                    <Link to={`/dashboard/update-hotel/${item._id}`}><BiPen/></Link>
-                                    <BsTrash/>
+                                    <Link to={`/dashboard/update-room/${item._id}`}><BiPen/></Link>
                                 </div>
                             </td>
-
                         </tr>
                     ))}
                     </tbody>

@@ -91,7 +91,7 @@ const FindRoomForm = () => {
                         as="select"
                         renderOption={() => (
                             <>
-                                <option value="">Select Location</option>
+                                <option value={""}>Any</option>
                                 {getUniqueElem(addresses.map(add => add["city"])).map((elem, i) => (
                                     <option key={i} value={elem}>{elem}</option>
                                 ))}

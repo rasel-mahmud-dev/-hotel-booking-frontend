@@ -9,7 +9,7 @@ import InfoMessage from "components/InfoMessage/InfoMessage.jsx";
 import ImageChoose from "components/Input/Image.jsx";
 import roomTypeData from "src/store/roomTypeData.json"
 
-import {createRoomAction, fetchOwnerHotelAction, getHotelDetailAction} from "store/actions/hotelAction.js";
+import {createRoomAction, fetchOwnerHotelAction, getRoomDetailAction} from "store/actions/hotelAction.js";
 
 
 const AddRoom = () => {
@@ -42,7 +42,7 @@ const AddRoom = () => {
     useEffect(() => {
         if (roomId) {
             const query = "?type=edit&roomId=" + roomId
-            dispatch(getHotelDetailAction(query)).unwrap().then((data) => {
+            dispatch(getRoomDetailAction(query)).unwrap().then((data) => {
                 if (data) {
                     setUserInput({
                         roomNo: data.roomNo,
@@ -103,7 +103,7 @@ const AddRoom = () => {
         }
 
         dispatch(createRoomAction(formData)).unwrap().then(() => {
-            navigate('/dashboard/rooms')
+            navigate('/dashboard/my-rooms')
         }).finally(() => {
             setUserInput({isLoading: false})
         })

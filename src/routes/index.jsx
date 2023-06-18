@@ -15,6 +15,7 @@ import FilterRooms from "pages/FilterRooms/FilterRooms.jsx";
 import HomePage from "pages/Homepage/HomePage.jsx";
 import Login  from "pages/Login/Login.jsx";
 import MyBookings from "pages/Dashboard/User/MyBookings.jsx";
+import MyRooms from "pages/Dashboard/HotelOwner/MyRooms.jsx";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
             {path: "add-hotel", element: <AddHotel/>},
             {path: "update-hotel/:hotelId", element: <AddHotel/>},
             {path: "my-hotel", element: <MyHotel/>},
+            {path: "my-rooms", element: <MyRooms/>},
 
             {path: "my-bookings", element: <MyBookings/>},
 
