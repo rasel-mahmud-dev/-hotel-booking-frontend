@@ -3,13 +3,13 @@ import {useDispatch} from "react-redux";
 import Modal from "components/Modal/Modal.jsx";
 import Button from "components/Button/Button.jsx";
 import {IoBagCheckOutline} from "react-icons/io5";
-import {reserveRoomAction} from "store/actions/hotelAction.js";
+import {reserveRoomAction} from "store/actions/roomAction.js";
 import {toast} from "react-toastify";
 import trimText from "src/utils/trimText.js";
 import {RiKey2Line} from "react-icons/ri";
 
 
-function BookingModal({bookingItem, onClose, filterInput}) {
+function BookingModal({bookingItem, onClose, checkInDate, checkOutDate}) {
 
     const dispatch = useDispatch()
 
@@ -18,8 +18,8 @@ function BookingModal({bookingItem, onClose, filterInput}) {
             roomId: room._id,
             totalPrice: room.price,
             hotelId: room.hotelId,
-            checkInDate: new Date(new Date(filterInput.checkInDate).toDateString()),
-            checkOutDate: new Date(new Date(filterInput.checkOutDate).toDateString())
+            checkInDate: new Date(new Date(checkInDate).toDateString()),
+            checkOutDate: new Date(new Date(checkOutDate).toDateString())
         }
 
         dispatch(reserveRoomAction(payload)).unwrap().then((ex) => {
@@ -58,12 +58,12 @@ function BookingModal({bookingItem, onClose, filterInput}) {
 
                                         <div className="bg-primary/10 text-sm text-gray-500 rounded p-3 text-center">
                                             <h5 className="text-gray-600 text-xs font-medium">CHECK-IN</h5>
-                                            <span>{new Date(filterInput.checkInDate).toDateString()}</span>
+                                            <span>{new Date(checkInDate).toDateString()}</span>
                                         </div>
 
                                         <div className="bg-primary/10 text-sm text-gray-500 rounded p-3 text-center">
                                             <h5 className="text-gray-600 text-xs font-medium">CHECK-OUT</h5>
-                                            <span>{new Date(filterInput.checkOutDate).toDateString()}</span>
+                                            <span>{new Date(checkOutDate).toDateString()}</span>
                                         </div>
 
                                         <div className="bg-primary/10 text-sm text-gray-500 rounded p-3 text-center">
@@ -74,7 +74,7 @@ function BookingModal({bookingItem, onClose, filterInput}) {
 
                                         <div className="bg-primary/10 text-sm text-gray-500 rounded p-3 text-center">
                                             <h5 className="text-gray-600 text-xs font-medium">NIGHTS</h5>
-                                            <span>{totalNight(new Date(filterInput.checkInDate).toDateString(), new Date(filterInput.checkOutDate).toDateString())}</span>
+                                            <span>{totalNight(new Date(checkInDate).toDateString(), new Date(checkOutDate).toDateString())}</span>
                                         </div>
 
 

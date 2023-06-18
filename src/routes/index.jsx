@@ -1,23 +1,27 @@
 import {createBrowserRouter} from "react-router-dom"
 import Main from "layout/Main";
+import {lazy} from "react";
 
-import Registration from "pages/Registration/Registration.jsx";
 import Dashboard from "layout/Dashboard.jsx";
 import DashboardHome from "pages/Dashboard/DashboardHome.jsx";
+
 import PrivateRoute from "src/middleware/PrivateRoute.jsx";
 import AuthExcludeRoute from "src/middleware/AuthExcludeRoute.jsx";
-import AddHotel from "pages/Dashboard/Shared/AddHotel.jsx";
-import MyHotel from "pages/Dashboard/HotelOwner/MyHotel.jsx";
-import AddRoom from "pages/Dashboard/Shared/AddRoom.jsx";
-import FilterRooms from "pages/FilterRooms/FilterRooms.jsx";
-
-
 import HomePage from "pages/Homepage/HomePage.jsx";
 import Login from "pages/Login/Login.jsx";
-import MyBookings from "pages/Dashboard/User/MyBookings.jsx";
-import MyRooms from "pages/Dashboard/HotelOwner/MyRooms.jsx";
-import AllUsers from "pages/Dashboard/Admin/AllUsers.jsx";
-import AllBookings from "pages/Dashboard/Admin/AllBookings.jsx";
+
+
+const AddHotel = lazy(() => import("pages/Dashboard/Shared/AddHotel.jsx"));
+const AllUsers = lazy(() => import("pages/Dashboard/Admin/AllUsers.jsx"));
+const MyHotel = lazy(() => import("pages/Dashboard/HotelOwner/MyHotel.jsx"));
+const AddRoom = lazy(() => import("pages/Dashboard/Shared/AddRoom.jsx"));
+const FilterRooms = lazy(() => import("pages/FilterRooms/FilterRooms.jsx"));
+const Registration = lazy(() => import("pages/Registration/Registration.jsx"));
+
+
+const MyBookings = lazy(() => import( "pages/Dashboard/User/MyBookings.jsx"))
+const MyRooms = lazy(() => import( "pages/Dashboard/HotelOwner/MyRooms.jsx"))
+const AllBookings = lazy(() => import( "pages/Dashboard/Admin/AllBookings.jsx"));
 
 const router = createBrowserRouter([
     {

@@ -59,8 +59,6 @@ const sidebarLinks = [
 const Dashboard = () => {
     useScrollTop();
 
-    const {auth} = useSelector(state => state.authState);
-
     const location = useLocation()
 
 

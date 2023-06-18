@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllHotelAction} from "store/actions/hotelAction.js";
 import {BiPen} from "react-icons/bi";
-import {BsTrash} from "react-icons/bs";
 import trimText from "src/utils/trimText.js";
 import {Link} from "react-router-dom";
 import Button from "components/Button/Button.jsx";

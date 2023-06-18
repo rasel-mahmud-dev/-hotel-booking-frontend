@@ -1,74 +1,54 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from "components/Button/Button.jsx";
+import {useDispatch} from "react-redux";
+import {filterRoomByTypeAction} from "store/actions/roomAction.js";
+import useCustomReducer from "src/hooks/useReducer.jsx";
 import Room from "components/Room/Room.jsx";
+import {setBookingItemInfo} from "store/slices/hotelSlice.js";
 
 const FilterRooms = () => {
 
     const [selectRoomTypeId, setSelectRoomTypeId] = useState("")
+    const dispatch = useDispatch()
+
+    const [rooms, setRooms] = useCustomReducer({})
 
     const categories = [
         {label: "All Rooms", id: ""},
-        {label: "Economy", id: "economy"},
-        {label: "Luxe", id: "luxe"},
+        {label: "Single Room", id: "Single Room"},
+        {label: "Duplex Room", id: "Duplex Room"},
         {label: "Standard", id: "standard"},
     ]
 
+    function filterRoomByType(selectRoomTypeId) {
+        // first check in cache if not exist
+        if (rooms[selectRoomTypeId] && Array.isArray(rooms[selectRoomTypeId]) && rooms[selectRoomTypeId].length > 0) return;
 
-    const data = [
-        {
-            title: "asasdf",
-            price: "234",
-            thumb: "/images/room-1.jpg",
-            categoryId: "economy",
-        },
-        {
-            title: "asasdf",
-            price: "234",
-            thumb: "/images/room-2.jpg",
-            categoryId: "standard",
-        },
-        {
-            title: "asasdf",
-            price: "234",
-            thumb: "/images/room-3.jpg",
-            categoryId: "luxe",
-        },
-        {
-            title: "asasdf",
-            price: "234",
-            thumb: "/images/room-4.jpg",
-            categoryId: "luxe",
-        },
-        {
-            title: "asasdf",
-            price: "234",
-            thumb: "/images/room-5-950x634.jpg",
-            categoryId: "standard",
-        },
-        {
-            title: "asasdf",
-            price: "234",
-            thumb: "/images/room-6.jpg",
-            categoryId: "economy",
-        },
-        {
-            title: "asasdf",
-            price: "234",
-            thumb: "/images/room-7.jpg",
-            categoryId: "standard",
-        }
-    ]
-
-    function filterByCategory(rooms) {
-        return rooms.filter(room => selectRoomTypeId === "" ? true : room.categoryId === selectRoomTypeId)
+        //then fetch from server
+        dispatch(filterRoomByTypeAction(selectRoomTypeId)).unwrap().then(rooms => {
+            setRooms({
+                [selectRoomTypeId]: rooms
+            })
+        })
     }
 
+    useEffect(() => {
+        filterRoomByType(selectRoomTypeId)
+    }, [selectRoomTypeId])
+
+    function handleShowBookingModal(room) {
+        dispatch(setBookingItemInfo({
+            room: room,
+        }))
+    }
+
+
     return (
-        <section>
+        <section id="category-room">
 
             <h3 className="section-title text-center">Choose your Room</h3>
 
-            <div className="flex justify-center gap-x-4 mt-10">
+            <div className="flex justify-center gap-4 mt-10 flex-wrap">
                 {categories.map((category, i) => (
                     <div key={i}>
                         <Button onClick={() => setSelectRoomTypeId(category.id)}
@@ -79,14 +59,18 @@ const FilterRooms = () => {
                 ))}
             </div>
 
-
             <div>
-
-                <div className="grid grid-cols-3 gap-4 justify-center mt-10">
-                    {filterByCategory(data).map(item => (
-                        <Room room={item} />
-                    ))}
-                </div>
+                {rooms[selectRoomTypeId] && Array.isArray(rooms[selectRoomTypeId]) && rooms[selectRoomTypeId].length === 0 ? (
+                    <div className="mt-20">
+                        <h4 className="font-semibold text-center">There no room of {selectRoomTypeId} category</h4>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center mt-10">
+                        {rooms[selectRoomTypeId] && Array.isArray(rooms[selectRoomTypeId]) && rooms[selectRoomTypeId].map(item => (
+                            <Room onBookNow={() => handleShowBookingModal(item)} room={item} key={item._id}/>
+                        ))}
+                    </div>
+                )}
             </div>
 
 

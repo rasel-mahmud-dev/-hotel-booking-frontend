@@ -8,6 +8,8 @@ import MenuDropdown from "components/Dropdown/MenuDropdown.jsx";
 import {logoutAction} from "store/slices/authSlice.js";
 import Avatar from "components/Avatar/Avatar.jsx";
 import {BsCart} from "react-icons/bs";
+import {HiBars3} from "react-icons/hi2";
+import {toggleSidebarAction} from "store/slices/appSlice.js";
 
 const Header = () => {
 
@@ -15,7 +17,6 @@ const Header = () => {
 
     const items = {
         Home: "/",
-        About: "",
         Gallery: "",
         Services: "",
         Rooms: "/",
@@ -60,18 +61,28 @@ const Header = () => {
         dispatch(logoutAction())
     }
 
+    function handleExpandSidebar(){
+        dispatch(toggleSidebarAction("dashboard"))
+    }
+
 
     return (
         <header className={`header ${isNavFixed ? "fixed-navigation" : ""}`}>
 
             <div className="container">
 
-                <Link to="/">
-                    <div className="logo flex items-center gap-x-1 cursor-pointer">
-                        <img src="/images/logo.svg" alt=""/>
-                        <h4 className="text-white text-xl uppercase">Shelter</h4>
+                <div className="flex items-center gap-x-2">
+                    <div className="block md:hidden" onClick={handleExpandSidebar}>
+                        <HiBars3 className="text-xl text-white" />
                     </div>
-                </Link>
+                    <Link to="/">
+                        <div className="logo flex items-center gap-x-1 cursor-pointer">
+                            <img src="/images/logo.svg" alt=""/>
+                            <h4 className="text-white text-xl uppercase">Shelter</h4>
+                        </div>
+                    </Link>
+
+                </div>
 
                 <nav>
                     {Object.keys(items).map(key => (

@@ -23,7 +23,7 @@ const FindRoomForm = () => {
         checkOutDate: nextDay,
         city: "",
         roomType: "", // Standard //
-        capacity: 2,
+        capacity: 0,
     })
 
     function handleChange({target: {name, value}}) {
@@ -53,7 +53,7 @@ const FindRoomForm = () => {
 
     return (
         <div className="find-room-form card">
-            <form className="grid grid-cols-10 justify-center items-end gap-x-4 md:gap-x-8 px-2 md:px-10">
+            <div className="grid grid-cols-10 justify-center items-end gap-x-4 md:gap-x-8 px-2 md:px-10">
 
                 <div className="col-span-5 md:col-span-3 lg:col-span-2">
                     <InputGroup
@@ -118,7 +118,7 @@ const FindRoomForm = () => {
                 </div>
 
 
-            </form>
+            </div>
         </div>
     );
 };

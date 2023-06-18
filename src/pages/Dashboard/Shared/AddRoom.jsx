@@ -9,7 +9,8 @@ import InfoMessage from "components/InfoMessage/InfoMessage.jsx";
 import ImageChoose from "components/Input/Image.jsx";
 import roomTypeData from "src/store/roomTypeData.json"
 
-import {createRoomAction, fetchOwnerHotelAction, getRoomDetailAction} from "store/actions/hotelAction.js";
+import {createRoomAction, getRoomDetailAction} from "store/actions/roomAction.js";
+import {fetchOwnerHotelAction} from "store/actions/hotelAction.js";
 
 
 const AddRoom = () => {

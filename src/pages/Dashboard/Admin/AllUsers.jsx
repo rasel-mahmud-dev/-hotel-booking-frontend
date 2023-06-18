@@ -25,23 +25,6 @@ const AllUsers = () => {
     }
 
 
-    function makeVerifyUser(userId) {
-        let formData = new FormData()
-        formData.append("status", "verified")
-        formData.append("userId", userId)
-        dispatch(updateProfileAction(formData)).unwrap().then(() => {
-            toast.success("User has been updated")
-            fetchUsers()
-        }).catch((msg) => toast.error(msg))
-    }
-
-    function blockUser(userId) {
-        let formData = new FormData()
-        formData.append("isBlocked", "true")
-        formData.append("userId", userId)
-
-    }
-
     function handleUpdateUser(payload) {
         const formData = new FormData()
         for (let payloadKey in payload) {

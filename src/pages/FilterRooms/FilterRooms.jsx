@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react';
 import InputGroup from "components/Input/InputGroup.jsx";
 import Button from "components/Button/Button.jsx";
 import useCustomReducer from "src/hooks/useReducer.jsx";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useSearchParams} from "react-router-dom";
 import roomTypeData from "src/store/roomTypeData.json"
 import Room from "components/Room/Room"
-import {filterRoomsAction} from "store/actions/hotelAction.js";
+import {filterRoomsAction} from "store/actions/roomAction.js";
 import addresses from "store/addresses.json"
 import getUniqueElem from "src/utils/getUniqueElem.js";
 import Loader from "components/Loader/Loader.jsx";
-import BookingModal from "components/BookingModal/BookingModal.jsx";
+import {toggleSidebarAction} from "store/slices/appSlice.js";
+import {setBookingItemInfo} from "store/slices/hotelSlice.js";
 
 
 const FilterRooms = () => {
@@ -23,6 +24,8 @@ const FilterRooms = () => {
     let checkInDate = searchParams.get("checkInDate")
     let checkOutDate = searchParams.get("checkOutDate")
     let capacity = searchParams.get("capacity")
+
+    const {openSidebar} = useSelector(state => state.appState)
 
 
     let nextDay = new Date()
@@ -41,7 +44,6 @@ const FilterRooms = () => {
     })
 
     const [rooms, setRooms] = useState([])
-    const [showBookingRoomId, setShowBookingRoomId] = useState("")
 
 
     useEffect(() => {
@@ -73,6 +75,13 @@ const FilterRooms = () => {
         setFilterInput({[name]: value})
     }
 
+    useEffect(() => {
+        dispatch(setBookingItemInfo({
+            checkOutDate: filterInput.checkOutDate.toISOString(),
+            checkInDate: filterInput.checkInDate.toISOString(),
+        }))
+    }, [filterInput.checkOutDate, filterInput.checkInDate])
+
     function handleFilterRoom(filterInput) {
 
         setFilterInput({isLoading: true})
@@ -93,10 +102,23 @@ const FilterRooms = () => {
         })
     }
 
+    function handleShowBookingModal(room) {
+        dispatch(setBookingItemInfo({
+            room: room,
+            checkOutDate: filterInput.checkOutDate.toISOString(),
+            checkInDate: filterInput.checkInDate.toISOString(),
+        }))
+    }
+
+    function toggleSidebar() {
+        dispatch(toggleSidebarAction(""))
+    }
 
     return (
-        <div className="dashboard-wrapper !px-0 ">
-            <div className="sidebar p-5">
+        <div className="container dashboard-wrapper !px-0 ">
+            <div className={`backdrop ${openSidebar === "dashboard" ? "backdrop-open" : ""}`}
+                 onClick={toggleSidebar}></div>
+            <div className={`sidebar  p-5 ${openSidebar === "dashboard" ? "sidebar-open" : ""}`}>
                 <h4>Filter Rooms</h4>
                 <InputGroup
                     selected={filterInput.checkInDate}
@@ -191,25 +213,20 @@ const FilterRooms = () => {
                             {rooms?.map((item) => (
                                 <Room
                                     key={item._id}
-                                    onBookNow={roomItem => setShowBookingRoomId(roomItem._id)}
+                                    onBookNow={_ => handleShowBookingModal(item)}
                                     room={item}/>
                             ))}
                         </div>
                     )}
 
 
-                    {/**** add order room modal ****/}
-                    {showBookingRoomId && (
-                        <BookingModal
-                            filterInput={filterInput}
-                            bookingItem={rooms.find(room => room._id === showBookingRoomId)}
-                            onClose={() => setShowBookingRoomId("")}/>
-                    )}
-
                 </div>
             </div>
+
+
         </div>
-    );
+    )
+        ;
 };
 
 

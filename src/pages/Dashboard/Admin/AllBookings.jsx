@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
-import {cancelBookingAction, fetchBookedRoomAction} from "store/actions/hotelAction.js";
-import trimText from "src/utils/trimText.js";
+import {cancelBookingAction, fetchBookedRoomAction} from "store/actions/roomAction.js";
 import {FaEllipsisH} from "react-icons/fa";
 import MenuDropdown from "components/Dropdown/MenuDropdown.jsx";
 import {toast} from "react-toastify";

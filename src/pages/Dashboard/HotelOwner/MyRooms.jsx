@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchRoomsAction} from "store/actions/hotelAction.js";
+import {fetchRoomsAction} from "store/actions/roomAction.js";
 import {BiPen} from "react-icons/bi";
 import trimText from "src/utils/trimText.js";
 import {Link} from "react-router-dom";
@@ -19,8 +19,6 @@ const MyRooms = () => {
             }
         })
     }, []);
-
-    const {hotel} = useSelector(state => state.hotelState)
 
 
     return (
