@@ -10,6 +10,7 @@ import ImageChoose from "components/Input/Image.jsx";
 import addresses from "store/addresses.json"
 import getUniqueElem from "src/utils/getUniqueElem.js";
 import {createHotelAction, getHotelDetailAction} from "store/actions/hotelAction.js";
+import {toast} from "react-toastify";
 
 
 const AddHotel = () => {
@@ -88,6 +89,8 @@ const AddHotel = () => {
 
         dispatch(createHotelAction(formData)).unwrap().then(() => {
             navigate('/dashboard/my-hotel')
+        }).catch(msg=>{
+            toast.error(msg)
         }).finally(() => {
             setUserInput({isLoading: false})
         })

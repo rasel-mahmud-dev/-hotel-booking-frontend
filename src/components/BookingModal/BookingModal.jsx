@@ -1,5 +1,5 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Modal from "components/Modal/Modal.jsx";
 import Button from "components/Button/Button.jsx";
 import {IoBagCheckOutline} from "react-icons/io5";
@@ -13,7 +13,15 @@ function BookingModal({bookingItem, onClose, checkInDate, checkOutDate}) {
 
     const dispatch = useDispatch()
 
+    const {auth} = useSelector(state => state.authState)
+
     function handleReserveRoom(room) {
+
+        if (!(auth && auth?._id)) {
+            onClose && onClose()
+            return toast.error("Please login first")
+        }
+
         let payload = {
             roomId: room._id,
             totalPrice: room.price,

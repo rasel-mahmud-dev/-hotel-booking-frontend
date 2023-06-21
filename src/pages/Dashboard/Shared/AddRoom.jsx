@@ -11,6 +11,7 @@ import roomTypeData from "src/store/roomTypeData.json"
 
 import {createRoomAction, getRoomDetailAction} from "store/actions/roomAction.js";
 import {fetchOwnerHotelAction} from "store/actions/hotelAction.js";
+import {toast} from "react-toastify";
 
 
 const AddRoom = () => {
@@ -105,6 +106,8 @@ const AddRoom = () => {
 
         dispatch(createRoomAction(formData)).unwrap().then(() => {
             navigate('/dashboard/my-rooms')
+        }).catch(msg=>{
+            toast.error(msg)
         }).finally(() => {
             setUserInput({isLoading: false})
         })

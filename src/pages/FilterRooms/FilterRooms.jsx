@@ -35,7 +35,7 @@ const FilterRooms = () => {
     const [filterInput, setFilterInput] = useCustomReducer({
         hotelId: "",
         roomType: "", // Standard //
-        capacity: 2,
+        capacity: 0,
         city: "",
         checkInDate: new Date(),
         checkOutDate: nextDay,
